@@ -1,17 +1,51 @@
-import octobot_trading.modes.scripted_trading_mode.abstract_scripted_trading_mode as abstract_scripted_trading_mode
+# a42.ch CONFIDENTIAL
+# __________________
+#
+#  [2021] - [∞] a42.ch Incorporated
+#  All Rights Reserved.
+#
+# NOTICE:  All information contained herein is, and remains
+# the property of a42.ch Incorporated and its suppliers,
+# if any.  The intellectual and technical concepts contained
+# herein are proprietary to a42.ch Incorporated
+# and its suppliers and may be covered by U.S. and Foreign Patents,
+# patents in process, and are protected by trade secret or copyright law.
+# Dissemination of this information or reproduction of this material
+# is strictly forbidden unless prior written permission is obtained
+# from a42.ch Incorporated.
+#
+# If you want to use any code for commercial purposes,
+# or you want your own custom solution,
+# please contact me at max@a42.ch
+
+import octobot_commons.logging as logging
 import octobot_trading.enums as trading_enums
-from tentacles.Trading.Mode.semi_auto_trading_mode.semi_auto_trading_mode_settings import SemiAutoTradingModeSettings
+from octobot_trading.modes.script_keywords import context_management
+import tentacles.Meta.Keywords.matrix_library.basic_tentacles.basic_modes.mode_base.abstract_mode_base as abstract_mode_base
+import tentacles.Meta.Keywords.matrix_library.pro_tentacles.pro_modes.semi_auto_mode.semi_auto_trading_mode as semi_auto_trading_mode
 
 
-class SemiAutoTradingMode(abstract_scripted_trading_mode.AbstractScriptedTradingMode):
+class SemiAutoTradingMode(abstract_mode_base.AbstractBaseMode):
     def __init__(self, config, exchange_manager):
         super().__init__(config, exchange_manager)
         self.producer = SemiAutoTradingModeProducer
-        import backtesting_script
-        import profile_trading_script
+        if exchange_manager:
+            try:
+                import backtesting_script
 
-        self.register_script_module(profile_trading_script)
-        self.register_script_module(backtesting_script, live=False)
+                self.register_script_module(backtesting_script, live=False)
+            except (AttributeError, ModuleNotFoundError):
+                pass
+            try:
+                import profile_trading_script
+
+                self.register_script_module(profile_trading_script)
+            except (AttributeError, ModuleNotFoundError):
+                pass
+        else:
+            logging.get_logger(self.get_name()).error(
+                "At least one exchange must be enabled to use SemiAutoTradingMode"
+            )
 
     def get_mode_producer_classes(self) -> list:
         return [SemiAutoTradingModeProducer]
@@ -23,21 +57,12 @@ class SemiAutoTradingMode(abstract_scripted_trading_mode.AbstractScriptedTrading
         """
         return [
             trading_enums.ExchangeTypes.SPOT,
+            trading_enums.ExchangeTypes.FUTURE,
         ]
 
 
-class SemiAutoTradingModeProducer(SemiAutoTradingModeSettings):
-    async def _pre_script_call(self, context) -> None:
-        await self.make_strategy(context)
-
-    async def make_strategy(self, ctx) -> None:
-        # if not ctx.exchange_manager.is_backtesting:
-        #     # live trading
-        await self.build_and_trade_strategies_live(ctx)
-        # elif not self.trading_mode.get_initialized_trading_pair_by_bot_id(
-        #     ctx.symbol, ctx.time_frame
-        # ):
-        # await self.build_strategies_backtesting_cache(ctx)
-        # else:
-        #     # back-testing on all the other candles
-        #     await self.trade_strategies_backtesting(ctx)
+class SemiAutoTradingModeProducer(semi_auto_trading_mode.SemiAutoTradingModeMaking):
+    async def make_strategy(self, ctx: context_management.Context, action: str):
+        self.action = action
+        self.ctx = ctx
+        await self.make_semi_auto_strategy()

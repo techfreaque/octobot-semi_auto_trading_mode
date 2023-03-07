@@ -1,0 +1,13 @@
+author: DrakkarSoftware
+description: ''
+name: any_platform.zip
+repository: Unknown repository location
+short-name: any_platform.zip
+tags: []
+tentacles:
+- time_frame_strategy_evaluator@1.2.0
+- matrix_basic_keywords@0.6.0
+- matrix_pro_keywords@0.6.0
+- semi_auto_trading_mode@0.3.0
+type: tentacle_package
+version: unknown_version

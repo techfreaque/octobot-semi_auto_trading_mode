@@ -1,0 +1,55 @@
+{
+    "config": {
+        "crypto-currencies": {
+            "Bitcoin": {
+                "enabled": true,
+                "pairs": [
+                    "BTC/USDT:USDT"
+                ]
+            }
+        },
+        "exchanges": {
+            "binance": {
+                "enabled": false,
+                "exchange-type": "spot"
+            },
+            "binanceusdm": {
+                "enabled": true,
+                "exchange-type": "future"
+            },
+            "kucoin": {
+                "enabled": false
+            }
+        },
+        "trader": {
+            "enabled": true,
+            "load-trade-history": true,
+            "simulator": {
+                "enabled": true
+            }
+        },
+        "trader-simulator": {
+            "enabled": false,
+            "fees": {
+                "maker": 0.01,
+                "taker": 0.06
+            },
+            "starting-portfolio": {
+                "USDT": 10000
+            }
+        },
+        "trading": {
+            "reference-market": "USDT",
+            "risk": 0.5
+        }
+    },
+    "profile": {
+        "avatar": "matrix-icon.png",
+        "description": "This is the default profile for semi auto trading mode. Duplicate this profile to customize settings",
+        "id": "dda285df-035c-446a-9102-e4b11a9d0213",
+        "imported": false,
+        "name": "semi auto trading mode",
+        "origin_url": null,
+        "read_only": true
+    }
+}

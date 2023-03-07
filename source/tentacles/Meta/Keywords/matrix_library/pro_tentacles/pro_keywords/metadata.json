@@ -1,0 +1,6 @@
+{
+  "version": "0.7.0",
+  "origin_package": "Matrix-Pro-Tentacles",
+  "tentacles": ["pro_keywords"],
+  "tentacles-requirements": ["basic_tentacles", "pro_tentacles"]
+}

@@ -1,0 +1,88 @@
+{
+    "BTC/USDT:USDT_settings": {
+        "21_tp_settings": {
+            "21_take_profit_in_percent": 0.25,
+            "21_take_profit_type": "take profit based on fixed percent from entry",
+            "21_tp_risk_reward_target": 2
+        },
+        "2_enable_detailed_trade_alerts": true,
+        "2order_groups": 1,
+        "BTC/USDT:USDT_custom_settings_enabled": true,
+        "BTC/USDT:USDT_custom_trading_side": "long",
+        "BTC/USDT:USDT_settings_entry_settings": {
+            "2121_dynamic_entry_grid_1__amount_of_orders": 20,
+            "2121_dynamic_entry_grid_1__price_distribution_type": "linear_growth",
+            "2121_dynamic_entry_grid_1__price_growth_rate": 2,
+            "2121_dynamic_entry_grid_1__value_distribution_type": "linear_growth",
+            "2121_dynamic_entry_grid_1__value_growth_rate": 2,
+            "21_entry_dynamic_multi_grid_mode": false,
+            "21_entry_type": "Scale limit orders over a dynamic price range",
+            "21_scale_limit_orders_from": 0.5,
+            "21_scale_limit_orders_to": 0.0001
+        },
+        "BTC/USDT:USDT_settings_ping_pong_settings": {
+            "21_ping_pong_type": "Recreate entry orders when take profits get filled and repeat the process until the order gets canceled"
+        },
+        "BTC/USDT:USDT_settings_position_size_settings": {
+            "21_max_position_in_%_of_account_size": 100,
+            "21_position_per_trade_in_%_of_account_size": 50,
+            "21_position_size_type": "Position size based on % of account size",
+            "21_risk_per_trade_in_%": 0.5,
+            "21_total_risk_in_%": 2
+        },
+        "BTC/USDT:USDT_settings_sl_settings": {
+            "21_sl_in_%": 0.5,
+            "21_sl_type": "no SL"
+        },
+        "BTC/USDT:USDT_settings_sl_trailing_settings": {
+            "21_sl_trailing_type": "dont move the stop loss"
+        },
+        "enable_detailed_trade_alerts": true,
+        "entry_settings": {
+            "entry_static_multi_grid_mode": false,
+            "entry_type": "Scale limit orders over a static price range",
+            "static_entry_grid_1_amount_of_orders": 10,
+            "static_entry_grid_1_from_price": 22910,
+            "static_entry_grid_1_price_distribution_type": "linear_growth",
+            "static_entry_grid_1_price_growth_rate": 2,
+            "static_entry_grid_1_to_price": 22940,
+            "static_entry_grid_1_value_distribution_type": "linear_growth",
+            "static_entry_grid_1_value_growth_rate": 2
+        },
+        "exit_settings": {
+            "Recreate_exit_orders_on_new_entrys:_When_enabled_exit_orders_will_be_replaced_with_new_ones_based_on_the_current_candle": false,
+            "adapt_live_exits": false,
+            "sl_settings": {
+                "Bundle_stop_order_with_entry_order": true,
+                "SL_based_on_static_price": 22950,
+                "SL_type": "SL based on static_price"
+            },
+            "sl_trailing_settings": {
+                "SL_trailing_type": "dont move the stop loss"
+            },
+            "tp_settings": {
+                "Bundle_take_profit_order_with_entry_order": true,
+                "Take_profit_type": "take profit based on static price",
+                "take_profit_static_price": 22890
+            }
+        },
+        "position_size_settings": {
+            "max_position_in_%_of_account_size": 100,
+            "position_Size_Type": "Position size based on % of account size",
+            "position_per_trade_in_%_of_account_size": 50
+        }
+    },
+    "Candles_history_size": 200,
+
+    "activation_method": "once per bar close",
+    "default_config": [
+        "TimeFrameStrategyEvaluator"
+    ],
+    "enable_settings_for_all": false,
+    "pairs_to_trade": [
+        "BTC/USDT:USDT"
+    ],
+    "required_strategies": [
+        "TimeFrameStrategyEvaluator"
+    ]
+}
